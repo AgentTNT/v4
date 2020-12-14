@@ -191,18 +191,47 @@ esac
 #-----------------------------------------------------------------------------#
 # epel repo
 #-----------------------------------------------------------------------------#
-rpm -q epel-release >/dev/null 2>&1
-if [ $? -ne 0 ]; then
-    logthis "Installing EPEL Repo"
-    yum -y install epel-release
-    if [ $? -eq 0 ]; then
-        logthis "EPEL repo installed"
-    else
-        logthis "ERROR: EPEL installation failed"
+if [ $OSNAME -eq "CentOS" ]; then
+  rpm -q epel-release >/dev/null 2>&1
+  if [ $? -ne 0 ]; then
+      logthis "Installing EPEL Repo"
+      yum -y install epel-release
+      if [ $? -eq 0 ]; then
+          logthis "EPEL repo installed"
+      else
+          logthis "ERROR: EPEL installation failed"
+          logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+          exit 1
+      fi
+  fi
+elif [$OSNAME -eq "Oracle" ]; then
+  if [ $RELEASE -eq 7 ]; then
+    rpm -q oracle-epel-release-el7 >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+      logthis "Installing Oracle EPEL 7 Repo"
+      yum -y install oracle-epel-release-el7
+      if [ $? -eq 0 ]; then
+        logthis "Oracle EPEL 7 repo installed"
+      else
+        logthis "ERROR: Oracle EPEL 7 installation failed"
         logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
         exit 1
+      fi
     fi
-fi
+  elif [ $RELEASE -eq 8 ]; then
+    rpm -q oracle-epel-release-el8 >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+      logthis "Installing Oracle EPEL 8 Repo"
+      yum -y install oracle-epel-release-el8
+      if [ $? -eq 0 ]; then
+        logthis "Oracle EPEL 8 repo installed"
+      else
+        logthis "ERROR: Oracle EPEL 8 installation failed"
+        logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+        exit 1
+      fi
+    fi
+  fi
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
