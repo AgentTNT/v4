@@ -66,11 +66,11 @@ fi
 #-----------------------------------------------------------------------------#
 OSINFO=`cat /etc/*-release`
 if [[ $OSINFO =~ .*'Oracle'.* ]]; then
-  logthis "Good, you are running Oracle Linux"
   OSNAME="Oracle"
+  logthis "Good, you are running $OSNAME Linux"
 elif [[ $OSINFO =~ .*'CentOS'.* ]]; then
-  logthis "Good, you are running CentOS Linux"
   OSNAME="CentOS"
+  logthis "Good, you are running $OSNAME Linux"
 else
   logthis "ERROR: You are running an unsupported flavor of Linux"
   logthis "ERROR: Unsupported system, stopping now"
@@ -162,11 +162,11 @@ case "${aCTN[@]}" in
     ("$action "*|*" $action "*|*" $action")
        if [ ! -f /etc/yum.repos.d/eFa4-testing.repo ]; then
             if [[ $RELEASE -eq 7 ]]; then
-                logthis "Adding eFa CentOS 7 Testing Repo"
+                logthis "Adding eFa Enterprise Linux 7 Testing Repo"
                 rpm --import $mirror/rpm/eFa4/RPM-GPG-KEY-eFa-Project
                 curl -L $mirror/rpm/eFa4/eFa4-testing.repo -o /etc/yum.repos.d/eFa4-testing.repo
             else
-                logthis "Adding eFa CentOS 8 Testing Repo"
+                logthis "Adding eFa Enterprise Linux 8 Testing Repo"
                 rpm --import $mirror/rpm/eFa4/RPM-GPG-KEY-eFa-Project
                 curl -L $mirror/rpm/eFa4/CentOS8/eFa4-centos8-testing.repo -o /etc/yum.repos.d/eFa4-centos8-testing.repo
             fi
