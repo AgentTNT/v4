@@ -62,17 +62,30 @@ fi
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
-# check if we run CentOS 7 or 8
+# check if running a supported EL version of 7 or 8
 #-----------------------------------------------------------------------------#
-OSVERSION=`cat /etc/centos-release`
-if [[ $OSVERSION =~ .*'release 7.'.* ]]; then
-  logthis "Good you are running CentOS 7"
-  RELEASE=7
-elif [[ $OSVERSION =~ .*'release 8.'.* ]]; then
-  logthis "Good you are running CentOS 8"
-  RELEASE=8
+OSINFO=`cat /etc/*-release`
+if [[ $OSINFO =~ .*'Oracle'.* ]]; then
+  logthis "Good, you are running Oracle Linux"
+  OSNAME="Oracle"
+elif [[ $OSINFO =~ .*'CentOS'.* ]]; then
+  logthis "Good, you are running CentOS Linux"
+  OSNAME="CentOS"
 else
-  logthis "ERROR: You are not running CentOS 7 or 8"
+  logthis "ERROR: You are running an unsupported flavor of Linux"
+  logthis "ERROR: Unsupported system, stopping now"
+  logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+  exit 1
+fi
+
+if [[ $OSINFO =~ .*'release 7.'.* ]]; then
+  RELEASE=7
+  logthis "Good, you are running $OSNAME Linux $RELEASE"
+elif [[ $OSINFO =~ .*'release 8.'.* ]]; then
+  RELEASE=8
+  logthis "Good, you are running $OSNAME Linux $RELEASE"
+else
+  logthis "ERROR: You are running an unsupported release of $OSNAME Linux"
   logthis "ERROR: Unsupported system, stopping now"
   logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
   exit 1
