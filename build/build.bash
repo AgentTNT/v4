@@ -216,13 +216,13 @@ if [ "$OSNAME" = "CentOS" ]; then
   fi
 elif [ "$OSNAME" = "Oracle" ]; then
   if [ $RELEASE -eq 7 ]; then
-    rpm -q oracle-epel-release-el7 >/dev/null 2>&1
+    rpm -q epel-release >/dev/null 2>&1
     if [ $? -eq 0 ]; then
     logthis "$STRING_EPEL_PREV_INSTALLED"
     elif [[ $? -ne 0 ]]; then
       logthis "$STRING_EPEL_NOT_INSTALLED"
       logthis "$STRING_EPEL_INSTALLING"
-      yum -y install oracle-epel-release-el7
+      yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
       if [ $? -eq 0 ]; then
         logthis "$STRING_EPEL_INSTALLED"
       else
@@ -232,13 +232,13 @@ elif [ "$OSNAME" = "Oracle" ]; then
       fi
     fi
   elif [ $RELEASE -eq 8 ]; then
-    rpm -q oracle-epel-release-el8 >/dev/null 2>&1
+    rpm -q epel-release >/dev/null 2>&1
     if [ $? -eq 0 ]; then
      logthis "$STRING_EPEL_PREV_INSTALLED"
     elif [[ $? -ne 0 ]]; then
       logthis "$STRING_EPEL_NOT_INSTALLED"
       logthis "$STRING_EPEL_INSTALLING"
-      yum -y install oracle-epel-release-el8
+      yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
       if [ $? -eq 0 ]; then
         logthis "$STRING_EPEL_INSTALLED"
       else
