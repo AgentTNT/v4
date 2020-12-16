@@ -218,7 +218,7 @@ if [ "$OSNAME" = "CentOS" ]; then
       exit 1
     fi
   fi
-elif [ "$OSNAME" = "Oracle" ]; then
+elif [ "$OSNAME" = "Oracle" ] || [ "$OSNAME" = "Red Hat Enterprise" ]; then
   if [ $RELEASE -eq 7 ]; then
     rpm -q epel-release >/dev/null 2>&1
     if [ $? -eq 0 ]; then
