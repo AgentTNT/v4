@@ -263,16 +263,26 @@ if [[ $RELEASE -eq 7 ]]; then
         if [ $? -eq 0 ]; then
             logthis "IUS repo installed"
             rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-7
+            if [[ "$OSNAME" = "Oracle" ]]; then
+              #Needed for perl packages on Oracle Linux
+              logthis "Enabling $OSNAME Linux $RELEASE Optional Latest repo"
+              yum-config-manager --enable ol7_optional_latest
+            fi
         else
             logthis "ERROR: IUS installation failed"
             logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
             exit 1
         fi
     fi
-else
+elif [[ $RELEASE -eq 8 ]]; then
+  if [[ "$OSNAME" = "CentOS" ]]; then
     logthis "Enabling CentOS 8 PowerTools Repo"
     yum config-manager --set-enabled powertools
     [ $? -ne 0 ] && exit 1
+  elif [[ "$OSNAME" = "Oracle" ]]; then
+    logthis "Enabling Oracle Linux 8 CodeReady Builder repo"
+    yum config-manager --set-enabled ol8_codeready_builder
+  fi
 fi
 #-----------------------------------------------------------------------------#
 
