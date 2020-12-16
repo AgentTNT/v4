@@ -223,6 +223,7 @@ elif [ "$OSNAME" = "Oracle" ]; then
       logthis "$STRING_EPEL_NOT_INSTALLED"
       logthis "$STRING_EPEL_INSTALLING"
       yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
       if [ $? -eq 0 ]; then
         logthis "$STRING_EPEL_INSTALLED"
       else
@@ -239,6 +240,7 @@ elif [ "$OSNAME" = "Oracle" ]; then
       logthis "$STRING_EPEL_NOT_INSTALLED"
       logthis "$STRING_EPEL_INSTALLING"
       yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+      rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
       if [ $? -eq 0 ]; then
         logthis "$STRING_EPEL_INSTALLED"
       else
