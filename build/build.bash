@@ -273,6 +273,9 @@ if [[ $RELEASE -eq 7 ]]; then
               #Needed for perl packages on Oracle Linux
               logthis "Enabling $OSNAME Linux $RELEASE Optional Latest repo"
               yum-config-manager --enable ol7_optional_latest
+            elif [[ "$OSNAME" = "Red Hat Enterprise" ]]; then
+              logthis "Enabling $OSNAME Linux $RELEASE Optional Latest repo"
+              subscription-manager repos --enable rhel-7-server-optional-rpms
             fi
         else
             logthis "ERROR: IUS installation failed"
