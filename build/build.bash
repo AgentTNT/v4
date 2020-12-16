@@ -64,13 +64,17 @@ fi
 #-----------------------------------------------------------------------------#
 # check if running a supported EL version of 7 or 8
 #-----------------------------------------------------------------------------#
+STRING_OSNAME="Good, you are running $OSNAME Linux"
 OSINFO=`cat /etc/*-release`
 if [[ $OSINFO =~ .*'Oracle'.* ]]; then
   OSNAME="Oracle"
-  logthis "Good, you are running $OSNAME Linux"
+  logthis "$STRING_OSNAME"
 elif [[ $OSINFO =~ .*'CentOS'.* ]]; then
   OSNAME="CentOS"
-  logthis "Good, you are running $OSNAME Linux"
+  logthis "$STRING_OSNAME"
+elif [[ $OSINFO =~ .*'Red Hat Enterprise'.* ]]; then
+  OSNAME="Red Hat Enterprise"
+  logthis "$STRING_OSNAME"
 else
   logthis "ERROR: You are running an unsupported flavor of Linux"
   logthis "ERROR: Unsupported system, stopping now"
