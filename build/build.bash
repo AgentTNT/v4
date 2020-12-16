@@ -285,12 +285,15 @@ if [[ $RELEASE -eq 7 ]]; then
     fi
 elif [[ $RELEASE -eq 8 ]]; then
   if [[ "$OSNAME" = "CentOS" ]]; then
-    logthis "Enabling CentOS 8 PowerTools Repo"
+    logthis "Enabling $OSNAME Linux $RELEASE PowerTools Repo"
     yum config-manager --set-enabled powertools
     [ $? -ne 0 ] && exit 1
   elif [[ "$OSNAME" = "Oracle" ]]; then
-    logthis "Enabling Oracle Linux 8 CodeReady Builder repo"
+    logthis "Enabling $OSNAME Linux $RELEASE CodeReady Builder repo"
     yum config-manager --set-enabled ol8_codeready_builder
+  elif [[ "$OSNAME" = "Red Hat Enterprise" ]]; then
+    logthis "Enabling $OSNAME Linux $RELEASE CodeReady Builder repo"
+    subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
   fi
 fi
 #-----------------------------------------------------------------------------#
