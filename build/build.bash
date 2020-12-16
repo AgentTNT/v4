@@ -21,6 +21,13 @@ action=$1
 [[ -z $action ]] && action="production" # default to prod if no arg supplied
 
 #-----------------------------------------------------------------------------#
+# Declare variables
+#-----------------------------------------------------------------------------#
+STRING_SCRIPT_ABORT="^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+
+
+
+#-----------------------------------------------------------------------------#
 # Install eFa
 #-----------------------------------------------------------------------------#
 mirror="https://mirrors.efa-project.org"
@@ -53,10 +60,10 @@ logthis "$HEADER"
 # check if user is root
 #-----------------------------------------------------------------------------#
 if [ `whoami` == root ]; then
-  logthis "Good you are root."
+  logthis "Good, you are root."
 else
   logthis "ERROR: Please become root first."
-  logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+  logthis "$STRING_SCRIPT_ABORT"
   exit 1
 fi
 #-----------------------------------------------------------------------------#
@@ -71,12 +78,10 @@ elif [[ $OSINFO =~ .*'CentOS'.* ]]; then
   OSNAME="CentOS"
 elif [[ $OSINFO =~ .*'Red Hat Enterprise'.* ]]; then
   OSNAME="Red Hat Enterprise"
-elif [[ $OSNAME -eq "CentOS" ]] || [[ $OSNAME -eq "Oracle" ]] || [[ $OSNAME -eq "Red Hat Enterprise" ]]; then
-  logthis "Good, you are running $OSNAME Linux"
 else
-  logthis "ERROR: You are running an unsupported flavor of Linux"
+  logthis "ERROR: You are running an unsupported distribution of Linux"
   logthis "ERROR: Unsupported system, stopping now"
-  logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+  logthis "$STRING_SCRIPT_ABORT"
   exit 1
 fi
 
@@ -89,7 +94,7 @@ elif [[ $OSINFO =~ .*'release 8.'.* ]]; then
 else
   logthis "ERROR: You are running an unsupported release of $OSNAME Linux"
   logthis "ERROR: Unsupported system, stopping now"
-  logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+  logthis "$STRING_SCRIPT_ABORT"
   exit 1
 fi
 #-----------------------------------------------------------------------------#
@@ -101,7 +106,7 @@ if [[ -z $(grep -i 'lxc\|docker' /proc/1/cgroup) ]]; then
     if [[ -f /etc/selinux/config && -n $(grep -i ^SELINUX=disabled$ /etc/selinux/config)  ]]; then
         logthis "ERROR: SELinux is disabled and this is not an lxc container"
         logthis "ERROR: Please enable SELinux and try again."
-        logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+        logthis "$STRING_SCRIPT_ABORT"
         exit 1
     fi
 fi
@@ -118,7 +123,7 @@ if [[ $? -eq 0 ]]; then
 else
   logthis "ERROR: No network connectivity"
   logthis "ERROR: unable to reach $mirror"
-  logthis "^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
+  logthis "$STRING_SCRIPT_ABORT"
   exit 1
 fi
 #-----------------------------------------------------------------------------#
@@ -198,7 +203,6 @@ STRING_EPEL_NOT_INSTALLED="$OSNAME EPEL $RELEASE repo is not installed"
 STRING_EPEL_INSTALLING="Installing $OSNAME EPEL $RELEASE Repo"
 STRING_EPEL_INSTALLED="$OSNAME EPEL $RELEASE repo installed"
 STRING_EPEL_ERROR="ERROR: $OSNAME EPEL $RELEASE installation failed"
-STRING_SCRIPT_ABORT="^^^^^^^^^^ SCRIPT ABORTED ^^^^^^^^^^"
 
 if [ "$OSNAME" = "CentOS" ]; then
   rpm -q epel-release >/dev/null 2>&1
