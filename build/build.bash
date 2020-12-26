@@ -161,6 +161,22 @@ fi
 #-----------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------#
+# Install yum-utils if missing
+#-----------------------------------------------------------------------------#
+rpm -q yum-utils >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    logthis "Installing yum-utils"
+    yum -y install yum-utils
+    if [ $? -eq 0 ]; then
+        logthis "yum-utils installed"
+    else
+        logthis "ERROR: yum-utils installation failed"
+        exit 1
+    fi
+fi
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
 # Add eFa Repo
 #-----------------------------------------------------------------------------#
 aCTN=(testing kstesting testingnoefa)
@@ -308,7 +324,7 @@ if [[ $RELEASE -eq 7 ]]; then
 	if [ $? -eq 0 ]; then
 		logthis "Remi PHP Repo is already installed"
     elif [ $? -ne 0 ]; then
-		logthis "Remi PHP repo is not installed"
+	logthis "Remi PHP repo is not installed"
         logthis "Installing Remi PHP Repo"
         yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 	yum-config-manager --enable remi-php74
