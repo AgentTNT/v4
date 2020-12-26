@@ -182,11 +182,11 @@ case "${aCTN[@]}" in
 
     *)  if [ ! -f /etc/yum.repos.d/eFa4.repo ]; then
             if [[ $RELEASE -eq 7 ]]; then
-                logthis "Adding eFa Repo"
+                logthis "Adding eFa Enterprise Linux 7 Repo"
                 rpm --import $mirror/rpm/eFa4/RPM-GPG-KEY-eFa-Project
                 curl -L $mirror/rpm/eFa4/eFa4.repo -o /etc/yum.repos.d/eFa4.repo
             else
-                logthis "Adding eFa Repo"
+                logthis "Adding eFa Enterprise Linux 8 Repo"
                 rpm --import $mirror/rpm/eFa4/RPM-GPG-KEY-eFa-Project
                 curl -L $mirror/rpm/eFa4/CentOS8/eFa4-centos8.repo -o /etc/yum.repos.d/eFa4.repo
             fi
@@ -297,6 +297,48 @@ elif [[ $RELEASE -eq 8 ]]; then
     logthis "Enabling $OSNAME Linux $RELEASE CodeReady Builder repo"
     subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms
   fi
+fi
+#-----------------------------------------------------------------------------#
+
+#-----------------------------------------------------------------------------#
+# Add Remi PHP repo
+#-----------------------------------------------------------------------------#
+if [[ $RELEASE -eq 7 ]]; then
+    rpm -q remi-release-7 >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		logthis "Remi PHP Repo is already installed"
+    elif [ $? -ne 0 ]; then
+		logthis "Remi PHP repo is not installed"
+        logthis "Installing Remi PHP Repo"
+        yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+        if [ $? -eq 0 ]; then
+            logthis "Remi PHP repo installed"
+            rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el7
+        else
+            logthis "ERROR: Remi PHP repo installation failed"
+            logthis "$STRING_SCRIPT_ABORT"
+            exit 1
+        fi
+    fi
+elif [[ $RELEASE -eq 8 ]]; then
+    rpm -q remi-release-8 >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		logthis "Remi PHP Repo is already installed"
+    elif [ $? -ne 0 ]; then
+        logthis "Remi PHP repo is not installed"
+        logthis "Installing Remi PHP Repo"
+        yum -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+        if [ $? -eq 0 ]; then
+            logthis "Remi PHP repo installed"
+            rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el8
+			yum module reset php
+			yum module install php:remi-7.4
+        else
+            logthis "ERROR: Remi PHP repo installation failed"
+            logthis "$STRING_SCRIPT_ABORT"
+            exit 1
+        fi
+    fi
 fi
 #-----------------------------------------------------------------------------#
 
