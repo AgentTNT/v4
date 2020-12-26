@@ -311,9 +311,10 @@ if [[ $RELEASE -eq 7 ]]; then
 		logthis "Remi PHP repo is not installed"
         logthis "Installing Remi PHP Repo"
         yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+	yum-config-manager --enable remi-php74
         if [ $? -eq 0 ]; then
             logthis "Remi PHP repo installed"
-            rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el7
+            rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
         else
             logthis "ERROR: Remi PHP repo installation failed"
             logthis "$STRING_SCRIPT_ABORT"
@@ -331,8 +332,8 @@ elif [[ $RELEASE -eq 8 ]]; then
         if [ $? -eq 0 ]; then
             logthis "Remi PHP repo installed"
             rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el8
-			yum module reset php
-			yum module install php:remi-7.4
+			yum -y module reset php
+			yum -y module install php:remi-7.4
         else
             logthis "ERROR: Remi PHP repo installation failed"
             logthis "$STRING_SCRIPT_ABORT"
