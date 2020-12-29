@@ -74,7 +74,7 @@ else
   yum -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm
   rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el8
   yum -y module reset php
-	yum -y module install php:remi-7.4
+  yum -y module install php:remi-7.4
   yum config-manager --set-enabled powertools
   [ $? -ne 0 ] && exit 1
 fi
