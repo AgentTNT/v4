@@ -28,11 +28,11 @@ License:   GNU GPL v3+
 Source0:   eFa-base-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-BuildRequires: php-cli >= 7.4}
 BuildRequires: wget >= 1.14-18
-BuildRequires: php-json >= 7.4}
-BuildRequires: php-xml >= 7.4}
-BuildRequires: php-pdo >= 7.4}
+BuildRequires: php-cli >= 7.4
+BuildRequires: php-json >= 7.4
+BuildRequires: php-pdo >= 7.4
+BuildRequires: php-xml >= 7.4
 
 
 %description
