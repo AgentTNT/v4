@@ -29,10 +29,10 @@ Source0:   eFa-base-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 BuildRequires: wget >= 1.14-18
-BuildRequires: php-cli >= 7.4
-BuildRequires: php-json >= 7.4
-BuildRequires: php-pdo >= 7.4
-BuildRequires: php-xml >= 7.4
+BuildRequires: php-cli >= 7.4.13-1
+BuildRequires: php-json >= 7.4.13-1
+BuildRequires: php-pdo >= 7.4.13-1
+BuildRequires: php-xml >= 7.4.13-1
 
 
 %description
