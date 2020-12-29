@@ -83,10 +83,10 @@ if [[ $RELEASE -eq 7 ]]; then
     perl-Test-Manifest perl-YAML perl-ExtUtils-CBuilder perl-Module-Build perl-IO-String perl-Geo-IP \
     perl-Net-CIDR-Lite perl-Sys-Hostname-Long perl-Net-IP perl-Net-Patricia perl-Data-Dump perl-generators \
     libicu-devel openldap-devel mysql-devel postgresql-devel sqlite-devel tinycdb-devel perl-Date-Calc \
-    perl-Sys-Syslog clamav perl-Geography-Countries php72u mariadb101u-server perl-Digest-SHA1 php72u-gd \
-    php72u-ldap php72u-mbstring php72u-mysqlnd php72u-xml perl-Archive-Zip perl-Env perl-Filesys-Df \
+    perl-Sys-Syslog clamav perl-Geography-Countries php mariadb101u-server perl-Digest-SHA1 php-gd \
+    php-ldap php-mbstring php-mysqlnd php-xml perl-Archive-Zip perl-Env perl-Filesys-Df \
     perl-IO-stringy perl-Net-CIDR perl-OLE-Storage_Lite perl-Sys-SigAction perl-MIME-tools wget \
-    php72u-json perl-Test-Simple php72u-cli m4 perl-Math-Int64 perl-Path-Class perl-Test-Fatal \
+    php-json perl-Test-Simple php-cli m4 perl-Math-Int64 perl-Path-Class perl-Test-Fatal \
     perl-Test-Number-Delta perl-namespace-autoclean perl-Role-Tiny perl-Data-Dumper-Concise \
     perl-DateTime perl-Test-Warnings perl-autodie perl-Test-Requires perl-Test-Tester perl-Clone-PP \
     perl-File-HomeDir perl-Sort-Naturally perl-JSON-MaybeXS perl-LWP-Protocol-https perl-Test-LeakTrace \
