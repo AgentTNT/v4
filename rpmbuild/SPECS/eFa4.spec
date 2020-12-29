@@ -49,20 +49,30 @@ Requires:  clamd >= 0.101.0-1
     # mariadb-server                             # base    # postfix, mailwatch
 Requires:  perl-DBD-MySQL >= 4.023-6
     # perl-DBD-mysql                             # base    # spamassassin
-Requires:  php >= 7.4
-    # php                                        # base    # mailwatch, frontend
 Requires:  bzip2-devel >= 1.0.6-13
     # bzip2-devel                                # base    # MailScanner
 Requires:  screen >= 4.1.0-0.23.20120314git3c2946
     # screen                                     # base    # basic system tools
-Requires:  php-gd >= 7.4
+Requires:  php >= 7.4.13-1
+    # php                                        # remi    # mailwatch, frontend
+Requires:  php-cli >= 7.4.13-1
+    # php-cli                                    # remi    # mailwatch, frontend
+Requires:  php-fpm >= 7.4.13-1
+    # php-fpm                                    # remi    # mailwatch, frontend
+Requires:  php-gd >= 7.4.13-1
     # php-gd                                     # remi    # mailwatch, frontend
-Requires:  php-mbstring >= 7.4
-    # php-mbstring                               # remi    # mailwatch, frontend
-Requires:  php-mysqlnd >= 7.4
-    # php-mysqlnd                                # remi    # mailwatch, frontend
-Requires:  php-ldap >= 7.4
+Requires:  php-json >= 7.4.13-1
+    # php-json                                   # remi    # eFaInit
+Requires:  php-ldap >= 7.4.13-1
     # php-ldap                                   # remi    # mailwatch, frontend
+Requires:  php-mbstring >= 7.4.13-1
+    # php-mbstring                               # remi    # mailwatch, frontend
+Requires:  php-mysqlnd >= 7.4.13-1
+    # php-mysqlnd                                # remi    # mailwatch, frontend
+Requires:  php-process >= 7.4.13-1
+    # php-process                                # remi    # eFaInit
+Requires:  php-xml >= 7.4.13-1
+    # php-xml                                    # remi    # mailwatch, frontend
 Requires:  httpd >= 2.4.6-67
     # httpd                                      # base    # mailwatch, frontend
 Requires:  cyrus-sasl-md5 >= 2.1.26-21
@@ -201,22 +211,12 @@ Requires:  p7zip-plugins >= 16.02-2
     # p7zip-plugins                              # epel    # MailScanner
 Requires:  tmpwatch >= 2.11-5
     # tmpwatch                                   # base    # Spamassassin
-Requires: php-fpm >= 7.4
-    # php-fpm                                    # remi    # mailwatch, frontend
 %{?el7:Requires: system-config-keyboard >= 1.4.0-4}
     # system-config-keyboard                     # base    # eFa
-Requires: php-process >= 7.4
-    # php-process                                # remi    # eFaInit
-Requires: php-json >= 7.4
-    # php-json                                   # remi    # eFaInit
 Requires: sqlgreywebinterface >= 1.1.9-2
     # sqlgreywebinterrface                       # eFa     # mailwatch
 Requires: perl-Sendmail-PMilter >= 1.00-1
     # perl-Sendmail-PMilter                      # eFa     # MailScanner
-Requires: php-cli >= 7.4
-    # php-cli                                    # remi    # mailwatch, frontend
-Requires: php-xml >= 7.4
-    # php-xml                                    # remi    # mailwatch, frontend
 Requires: dovecot >= 1:2.2.36-3
     # clucene-core                               # base    # postfix
 Requires: virt-what >= 1.18-4
