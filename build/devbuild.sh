@@ -60,11 +60,15 @@ fi
 yum -y install epel-release
 [ $? -ne 0 ] && exit 1
 
+yum -y install yum-utils
+[ $? -ne 0 ] && exit 1
+
 if [[ $RELEASE -eq 7 ]]; then
-  echo "- Adding IUS Repo"
-  yum -y install https://repo.ius.io/ius-release-el7.rpm
+  echo "- Adding Remi Repo"
+  yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+  yum-config-manager --enable remi-php74
   [ $? -ne 0 ] && exit 1
-  rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-IUS-7
+  rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi
   [ $? -ne 0 ] && exit 1
 else
   yum config-manager --set-enabled powertools
