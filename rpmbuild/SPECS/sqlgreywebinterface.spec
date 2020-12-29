@@ -34,7 +34,7 @@ Source:        %{name}-%{version}.tar.gz
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch:     noarch
 Requires:      httpd >= 2.4.6
-Requires:      php >= 7.4
+Requires:      php >= 7.4.13-1
 
 %description
 A SQLGrey webinterface
